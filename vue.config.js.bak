@@ -1,0 +1,28 @@
+var webpack = require("webpack");
+module.exports = {
+  publicPath: "",
+  configureWebpack: {
+    plugins: [
+      new webpack.ProvidePlugin({
+        zrender: "zrender",
+        "windows.zrender": "zrender",
+      }),
+    ],
+  },
+  devServer: {
+    proxy: {
+      '/api' : {
+        target: 'http://192.168.219.10:8281/',
+        changeOrigin: true,
+      },
+      '/ws' : {
+        target: 'http://192.168.219.10:8281/',
+        ws: true,
+      }
+    },
+    disableHostCheck: true,
+    overlay: false,
+  },
+
+  lintOnSave: undefined,
+};
